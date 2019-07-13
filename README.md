@@ -28,4 +28,4 @@ BSD
 
 ## Author Information
 
-Christian Pössinger (christian@poessinger.com)
+Christian Poessinger (christian@poessinger.com)
