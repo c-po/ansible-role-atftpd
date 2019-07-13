@@ -1,0 +1,4 @@
+---
+tftp_config: '/etc/default/atftpd'
+tftp_service: 'atftpd'
+

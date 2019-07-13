@@ -1,0 +1,8 @@
+---
+tftp_root_directory: '/tftpboot'
+tftp_user: 'nobody'
+tftp_group: 'nogroup'
+tftp_mode: '750'
+tftp_verbose: '3'
+tftp_port: '69'
+tftp_threads: '50'

@@ -1,0 +1,6 @@
+# {{ ansible_managed }}
+USE_INETD=false
+
+# OPTIONS below are used only with init script
+OPTIONS="--user {{ tftp_user }} --group {{ tftp_group }} --tftpd-timeout 300 --retry-timeout 5 --maxthread {{tftp_threads }}{% if tftp_bind_addr is defined %} --bind-address={{ tftp_bind_addr }}{% endif %} --port={{ tftp_port }} --verbose={{ tftp_verbose }} {{ tftp_root_directory }}"
+

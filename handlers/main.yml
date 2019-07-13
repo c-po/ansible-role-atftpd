@@ -1,0 +1,7 @@
+---
+
+- name: restart atftp
+  systemd:
+    name: "{{ tftp_service }}"
+    daemon-reload: true
+    state: restarted

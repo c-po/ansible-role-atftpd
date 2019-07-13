@@ -1,0 +1,40 @@
+---
+- name: Include distribution specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+  tags: tftp
+
+# Ansible would install rlinetd if non installed with "install_recommends: no"
+- name: Install packages (Debian)
+  apt:
+    name: "{{ tftp_packages }}"
+    state: latest
+    install_recommends: no
+  when: ansible_distribution == 'Debian'
+  tags: tftp
+
+- name: Install packages (non Debian)
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ tftp_packages }}"
+  when: ansible_distribution != 'Debian'
+  tags: tftp
+
+- name: Ensure tftp root directory exists
+  file:
+    path: "{{ tftp_root_directory }}"
+    state: directory
+    owner: "{{ tftp_user }}"
+    group: "{{ tftp_group }}"
+    mode: "{{ tftp_mode }}"
+  tags: tftp
+
+- name: Install configuration file
+  template:
+    dest: "{{ tftp_config }}"
+    src: atftpd.j2
+  notify:
+    - restart atftp
+  tags: tftp
